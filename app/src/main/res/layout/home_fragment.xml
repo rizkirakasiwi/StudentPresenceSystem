@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.example.sipress.ui.viewModel.HomeViewModel" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.HomeFragment">
+
+        <include layout="@layout/app_bar_main" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:background="@null"
+                app:elevation="0dp"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.appbar.CollapsingToolbarLayout
+                    app:layout_scrollFlags="scroll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <androidx.cardview.widget.CardView
+                            android:layout_marginTop="@dimen/standar_space"
+                            android:layout_marginStart="@dimen/standar_space"
+                            android:layout_marginEnd="@dimen/standar_space"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="@dimen/standar_radius"
+                            app:cardElevation="@dimen/standar_elevation"
+                            app:cardUseCompatPadding="true"
+                            >
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/blueCream"
+                                android:padding="@dimen/standar_space">
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:id="@+id/imgProfile"
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:src="@drawable/mts_member"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/nameText"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/minimum_space"
+                                    android:layout_marginEnd="@dimen/minimum_space"
+                                    android:text="Rizki Rakasiwi"
+                                    android:textAllCaps="true"
+                                    android:textSize="@dimen/header_text_size"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toTopOf="@+id/textView"
+                                    app:layout_constraintEnd_toStartOf="@id/profileMenu"
+                                    app:layout_constraintStart_toEndOf="@id/imgProfile"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_chainStyle="packed" />
+
+                                <TextView
+                                    android:id="@+id/textView"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/minimum_space"
+                                    android:layout_marginEnd="@dimen/minimum_space"
+                                    android:text="17184065"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toStartOf="@id/profileMenu"
+                                    app:layout_constraintStart_toEndOf="@id/imgProfile"
+                                    app:layout_constraintTop_toBottomOf="@+id/nameText" />
+
+                                <ImageButton
+                                    android:id="@+id/profileMenu"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:src="@drawable/ic_more_vertical"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_marginStart="@dimen/standar_space"
+                            android:layout_marginEnd="@dimen/standar_space"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="@dimen/standar_radius"
+                            app:cardElevation="@dimen/standar_elevation"
+                            app:cardUseCompatPadding="true">
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@color/redCream"
+                                android:padding="@dimen/standar_space">
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:id="@+id/scheduleIcon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    app:layout_constraintEnd_toEndOf="@id/scheduleText"
+                                    app:layout_constraintBottom_toTopOf="@+id/scheduleText"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:backgroundTint="@color/primaryColor"
+                                    android:src="@drawable/ic_date"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_chainStyle="packed"/>
+
+                                <TextView
+                                    android:id="@+id/scheduleText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Jadwal\nPelajaran"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/scheduleIcon" />
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:id="@+id/dailyAbsentIcon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="16dp"
+                                    android:layout_marginLeft="16dp"
+                                    android:src="@drawable/ic_date_today"
+                                    app:backgroundTint="@color/secondaryColor"
+                                    app:layout_constraintStart_toEndOf="@id/scheduleIcon"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintVertical_chainStyle="packed" />
+
+                                <TextView
+                                    android:id="@+id/dailyAbsentText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="Absensi\nHarian"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="@+id/dailyAbsentIcon"
+                                    app:layout_constraintStart_toStartOf="@id/dailyAbsentIcon"
+                                    app:layout_constraintTop_toBottomOf="@+id/dailyAbsentIcon" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <LinearLayout
+                            android:background="@color/blueCream"
+                            android:orientation="vertical"
+                            android:layout_marginTop="@dimen/standar_space"
+                            android:padding="@dimen/max_space"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:textSize="@dimen/header_text_size"
+                                android:textStyle="bold"
+                                android:textAllCaps="true"
+                                android:text="@string/on_going"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                            <TextView
+                                android:layout_marginTop="@dimen/standar_space"
+                                android:text="Matematika - Khofia Nurkomsiska S.Pd"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:text="Pukul 07:00 s/d 09:00"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:text="Ruangan ARPL1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+
+                            <LinearLayout
+                                android:gravity="end"
+                                android:layout_marginTop="@dimen/minimum_space"
+                                android:orientation="horizontal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_marginStart="@dimen/minimum_space"
+                                    android:layout_marginEnd="@dimen/minimum_space"
+                                    android:text="Belum Melakukan Absen"
+                                    android:textColor="@color/secondaryColor"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                                <ImageButton
+                                    android:background="?attr/selectableItemBackgroundBorderless"
+                                    android:src="@drawable/ic_camera"
+                                    app:tint="@color/secondaryColor"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <LinearLayout
+                android:padding="@dimen/standar_space"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="Jadwal Hari Ini"
+                    android:textSize="@dimen/header_text_size"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="@dimen/standar_space"
+                    app:adapter="@{viewModel.adapter()}"
+                    android:id="@+id/recyclerview_home"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "115978291386",
+    "project_id": "sipress-9fc8a",
+    "storage_bucket": "sipress-9fc8a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:115978291386:android:e380b9a4280998e73c5a83",
+        "android_client_info": {
+          "package_name": "com.example.sipress"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "115978291386-734usald71iuorsr8l7s15eli8gl4ced.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sipress",
+            "certificate_hash": "3d6238c6d0eb903d18ab43a8043cfd3b83914c11"
+          }
+        },
+        {
+          "client_id": "115978291386-5fmijp2gldr4pj60eoq6ev74512jhcrn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1kBfoKGCgUIc4sAHMMXY_WxDayNlbYV0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "115978291386-5fmijp2gldr4pj60eoq6ev74512jhcrn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

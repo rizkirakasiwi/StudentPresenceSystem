@@ -1,107 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    android:padding="24dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.fragment.CheckNISFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageButton
-        android:src="@drawable/ic_back"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="npsn"
+            type="String" />
+        <variable
+            name="batch"
+            type="String" />
+        <variable
+            name="nis"
+            type="String" />
+        <variable
+            name="viewModel"
+            type="com.example.sipress.ui.viewModel.CheckNISViewModel" />
+    </data>
+
     <LinearLayout
         android:orientation="vertical"
-        android:gravity="center"
+        android:padding="24dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:textSize="20sp"
-            android:text="@string/check_your_nis"
+        android:layout_height="match_parent"
+        tools:context=".ui.fragment.CheckNISFragment">
+
+        <ImageButton
+            android:src="@drawable/ic_back"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:text="@string/check_nis_text"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <LinearLayout
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-             <com.google.android.material.textfield.TextInputLayout
-                 android:layout_weight="1"
-                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                 android:layout_width="0dp"
-                 android:layout_height="wrap_content">
-                 <com.google.android.material.textfield.TextInputEditText
-                     android:hint="@string/choice_school"
-                     android:inputType="text"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"/>
-             </com.google.android.material.textfield.TextInputLayout>
-
-
-            <ImageButton
-                android:src="@drawable/ic_expand_more"
-                android:padding="16dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+            <TextView
+                android:textSize="20sp"
+                android:text="@string/check_your_nis"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-        </LinearLayout>
+                android:layout_height="wrap_content" />
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            <TextView
+                android:text="@string/check_nis_text"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_weight="1"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:hint="@string/choice_school"
+                        android:inputType="text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <ImageButton
+                    android:src="@drawable/ic_expand_more"
+                    android:padding="16dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_weight="1"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:hint="@string/batch"
+                        android:inputType="text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <ImageButton
+                    android:src="@drawable/ic_expand_more"
+                    android:padding="16dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
-                android:layout_weight="1"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <com.google.android.material.textfield.TextInputEditText
-                    android:hint="@string/batch"
-                    android:inputType="text"
+                    android:hint="@string/student_identity_number"
+                    android:inputType="number"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <ImageButton
-                android:src="@drawable/ic_expand_more"
-                android:padding="16dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+            <com.google.android.material.button.MaterialButton
+                android:layout_marginTop="8dp"
+                android:text="@string/check_nis"
+                android:backgroundTint="@color/secondaryColor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <com.google.android.material.textfield.TextInputEditText
-                android:hint="@string/student_identity_number"
-                android:inputType="number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.button.MaterialButton
-            android:layout_marginTop="8dp"
-            android:text="@string/check_nis"
-            android:backgroundTint="@color/secondaryColor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
     </LinearLayout>
-
-
-</LinearLayout>
+</layout>

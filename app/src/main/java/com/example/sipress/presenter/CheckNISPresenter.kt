@@ -1,6 +1,7 @@
 package com.example.sipress.presenter
 
 import android.app.AlertDialog
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,14 +11,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import com.example.sipress.R
 import com.example.sipress.data.SchoolData
+import com.example.sipress.data.UserData
 import com.example.sipress.presenter.storage.AuthStoragePresenter
 import com.example.sipress.presenter.storage.SchoolStoragePresenter
-import com.example.sipress.ui.fragment.CheckNISFragmentDirections
 import com.example.sipress.ui.viewModel.CheckNISViewModel
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -25,6 +27,10 @@ import javax.inject.Inject
 interface CheckNISPresenter {
     fun schoolsList():LiveData<List<SchoolData>?>
     fun batchList():LiveData<List<String>?>
+    fun schoolSelected():SchoolData?
+    fun batchSelected():String?
+    fun showAvailableSchool(view: View, schoolList:List<SchoolData>)
+    fun showBatch(view:View, batchList:List<String>)
     suspend fun loadSchools()
     suspend fun loadBatch(npsn:String)
     suspend fun checkAvailableNis(view:View, npsn: String, batch: String, nis: String)
@@ -38,13 +44,31 @@ class CheckNISPresenterImpl @Inject constructor(
         private const val TAG = "CheckNisPresenter"
     }
 
-    private val _schools = MutableLiveData<List<SchoolData>?>()
+    private val _schoolList = MutableLiveData<List<SchoolData>?>()
     private val _batchList = MutableLiveData<List<String>?>()
+    private val _school = MutableLiveData<SchoolData>()
+    private val _batch = MutableLiveData<String>()
 
-    override fun schoolsList(): LiveData<List<SchoolData>?> = _schools
+    override fun schoolsList(): LiveData<List<SchoolData>?> = _schoolList
 
     override fun batchList(): LiveData<List<String>?> {
         return _batchList
+    }
+
+    override fun schoolSelected(): SchoolData? {
+        return _school.value
+    }
+
+    override fun batchSelected(): String? {
+        return _batch.value
+    }
+
+    override fun showAvailableSchool(view: View, schoolList: List<SchoolData>) {
+        TODO("Not yet implemented")
+    }
+
+    override fun showBatch(view: View, batchList: List<String>) {
+        TODO("Not yet implemented")
     }
 
     override suspend fun loadSchools() {
@@ -60,10 +84,10 @@ class CheckNISPresenterImpl @Inject constructor(
                 val schoolData = document.toObject<SchoolData>()
                 schoolList.add(schoolData)
             }
-            _schools.value = schoolList
+            _schoolList.value = schoolList
         }.addOnFailureListener {
             Log.e(TAG, "failed to get school list with error ${it.message}")
-            _schools.value = null
+            _schoolList.value = null
         }
     }
 
@@ -87,9 +111,6 @@ class CheckNISPresenterImpl @Inject constructor(
     }
 
     override suspend fun checkAvailableNis(view:View, npsn: String, batch: String, nis: String) {
-         val checkNis = withContext(Dispatchers.IO){
-             authStoragePresenter.checkAvailableNis<Task<QuerySnapshot>>(npsn,batch,nis)
-         }
 
         val loadingLayout = LayoutInflater.from(view.context).inflate(
                 R.layout.loading_layout, null, false
@@ -109,10 +130,17 @@ class CheckNISPresenterImpl @Inject constructor(
 
         loadingDialog.show()
 
+        val checkNis = withContext(Dispatchers.IO){
+            authStoragePresenter.checkAvailableNis<Task<QuerySnapshot>>(npsn,batch,nis)
+        }
+
         checkNis.addOnSuccessListener {
-            loadingDialog.dismiss()
-            val bundle = bundleOf(CheckNISViewModel.SEND_NIS_CODE to nis)
-            view.findNavController().navigate(R.id.action_checkNISFragment_to_inputOTPCodeFragment, bundle)
+            val alert = alertDialog(
+                    view.context.getString(R.string.error),
+                    view.context.getString(R.string.error_account_already_in_use)
+            )
+
+            checkIfAlreadyUsed(view, loadingDialog, alert, it)
         }.addOnFailureListener {
             val firestoreException = (it as FirebaseFirestoreException).code.name
             Log.e(TAG, "failed to load existing NIS with error $firestoreException")
@@ -121,5 +149,19 @@ class CheckNISPresenterImpl @Inject constructor(
         }
 
 
+    }
+
+    private fun checkIfAlreadyUsed(view:View, loadingDialog:AlertDialog, alertDialog:AlertDialog, querySnapshot: QuerySnapshot){
+        for(document in querySnapshot){
+            val userData = document.toObject<UserData>()
+            if (!userData.password.isNullOrEmpty()){
+                loadingDialog.dismiss()
+                alertDialog.show()
+            }else{
+                loadingDialog.dismiss()
+                val bundle = bundleOf(CheckNISViewModel.SEND_NIS_CODE to userData.nis)
+                view.findNavController().navigate(R.id.action_checkNISFragment_to_inputOTPCodeFragment, bundle)
+            }
+        }
     }
 }

@@ -49,4 +49,7 @@
     <string name="error_firestore_data_loss">Data hilang atau rusak!</string>
     <string name="error_firestore_not_found">Data tidak ditemukan!</string>
     <string name="error_default">Terjadi kesalahan!</string>
+    <string name="error_account_already_in_use">NIS ini sudah dipakai!</string>
+    <string name="search_school">Cari Sekolah</string>
+    <string name="search">Cari</string>
 </resources>

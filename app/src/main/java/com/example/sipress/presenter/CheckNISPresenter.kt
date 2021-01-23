@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import com.example.sipress.R
 import com.example.sipress.data.SchoolData
 import com.example.sipress.data.UserData
+import com.example.sipress.databinding.SearchToChoiceLayoutBinding
 import com.example.sipress.presenter.storage.AuthStoragePresenter
 import com.example.sipress.presenter.storage.SchoolStoragePresenter
 import com.example.sipress.ui.viewModel.CheckNISViewModel
@@ -29,7 +30,7 @@ interface CheckNISPresenter {
     fun batchList():LiveData<List<String>?>
     fun schoolSelected():SchoolData?
     fun batchSelected():String?
-    fun showAvailableSchool(view: View, schoolList:List<SchoolData>)
+    fun showAvailableSchool(view: View, schoolList:List<SchoolData>?)
     fun showBatch(view:View, batchList:List<String>)
     suspend fun loadSchools()
     suspend fun loadBatch(npsn:String)
@@ -63,12 +64,22 @@ class CheckNISPresenterImpl @Inject constructor(
         return _batch.value
     }
 
-    override fun showAvailableSchool(view: View, schoolList: List<SchoolData>) {
-        TODO("Not yet implemented")
+    override fun showAvailableSchool(view: View, schoolList: List<SchoolData>?) {
+        val binding = SearchToChoiceLayoutBinding.inflate(LayoutInflater.from(view.context), null, false)
+        val alert = AlertDialog.Builder(view.context)
+                .setView(binding.root)
+                .create()
+        binding.searchText = view.context.getString(R.string.search_school)
+        alert.show()
     }
 
     override fun showBatch(view: View, batchList: List<String>) {
-        TODO("Not yet implemented")
+        val binding = SearchToChoiceLayoutBinding.inflate(LayoutInflater.from(view.context), null, false)
+        val alert = AlertDialog.Builder(view.context)
+                .setView(binding.root)
+                .create()
+        binding.searchText = view.context.getString(R.string.search_batch)
+        alert.show()
     }
 
     override suspend fun loadSchools() {

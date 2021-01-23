@@ -52,4 +52,5 @@
     <string name="error_account_already_in_use">NIS ini sudah dipakai!</string>
     <string name="search_school">Cari Sekolah</string>
     <string name="search">Cari</string>
+    <string name="search_batch">Angkatan</string>
 </resources>

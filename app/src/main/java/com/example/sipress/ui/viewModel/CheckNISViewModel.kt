@@ -28,31 +28,9 @@ class CheckNISViewModel @ViewModelInject constructor(
         const val SEND_NIS_CODE = "SendNis"
     }
 
-    private val _school = MutableLiveData<SchoolData?>()
-    val school : LiveData<SchoolData?> get() = _school
-
-    private val _batch = MutableLiveData<String?>()
-    val batch : LiveData<String?> get() = _batch
-
-    val schoolList:LiveData<List<SchoolData>?> get() = checkNISPresenter.schoolsList()
-    val batchList:LiveData<List<String>?> get()=checkNISPresenter.batchList()
-
-
-    fun loadSchoolList()=viewModelScope.launch(Dispatchers.Main){
-        checkNISPresenter.loadSchools()
+    fun showSearchSchoolDialog(view:View, schoolList: List<SchoolData>?) {
+        checkNISPresenter.showAvailableSchool(view, schoolList)
     }
-
-    fun loadBatch(npsn:String)=viewModelScope.launch(Dispatchers.Main){
-        checkNISPresenter.loadBatch(npsn)
-    }
-
-    fun selectSchool(view:View, list:List<SchoolData>){
-
-    }
-    fun checkNIS(view: View, npsn: String, batch: String, nis: String)=viewModelScope.launch(Dispatchers.Main){
-        checkNISPresenter.checkAvailableNis(view, npsn, batch, nis)
-    }
-
 
 
 }

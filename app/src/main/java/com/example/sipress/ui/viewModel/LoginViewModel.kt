@@ -5,8 +5,10 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.findNavController
 import com.example.sipress.R
 import com.example.sipress.presenter.LoginPresenter
+import com.example.sipress.ui.fragment.LoginFragmentDirections
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -33,6 +35,12 @@ class LoginViewModel @ViewModelInject constructor(
         viewModelScope.launch(Dispatchers.Main) {
             loginPresenter.signin(view, username, password)
         }
+    }
+
+    fun createAccount(view: View){
+        view.findNavController().navigate(
+                LoginFragmentDirections.actionLoginFragmentToCheckNISFragment()
+        )
     }
 }
 

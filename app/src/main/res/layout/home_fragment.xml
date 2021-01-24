@@ -94,6 +94,7 @@
 
                                 <ImageButton
                                     android:id="@+id/profileMenu"
+                                    android:contentDescription="@string/profile_menu"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:background="?attr/selectableItemBackgroundBorderless"
@@ -124,6 +125,7 @@
 
                                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                                     android:id="@+id/scheduleIcon"
+                                    android:contentDescription="@string/schedule_icon"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     app:layout_constraintEnd_toEndOf="@id/scheduleText"
@@ -146,6 +148,7 @@
 
                                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                                     android:id="@+id/dailyAbsentIcon"
+                                    android:contentDescription="@string/daily_absent_icon"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="16dp"
@@ -214,6 +217,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"/>
                                 <ImageButton
+                                    android:contentDescription="@string/camera_icon"
                                     android:background="?attr/selectableItemBackgroundBorderless"
                                     android:src="@drawable/ic_camera"
                                     app:tint="@color/secondaryColor"

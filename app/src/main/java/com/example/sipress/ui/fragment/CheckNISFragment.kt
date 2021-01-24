@@ -2,6 +2,7 @@ package com.example.sipress.ui.fragment
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +18,7 @@ class CheckNISFragment : Fragment() {
 
     companion object {
         fun newInstance() = CheckNISFragment()
+        private const val TAG = "CheckNISFragment"
     }
 
     private val viewModel: CheckNISViewModel by viewModels()
@@ -25,7 +27,7 @@ class CheckNISFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = CheckNisFragmentBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         return binding.root
@@ -33,8 +35,15 @@ class CheckNISFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewModel.loadSchoolList()
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.schoolList.observe(viewLifecycleOwner, {default->
+            binding.schoolList = default
+        })
+    }
 
 }

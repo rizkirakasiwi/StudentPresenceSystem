@@ -1,9 +1,6 @@
 package com.example.sipress.presenter
 
 import android.util.Log
-import android.view.View
-import com.example.sipress.data.ResultData
-import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import javax.inject.Inject

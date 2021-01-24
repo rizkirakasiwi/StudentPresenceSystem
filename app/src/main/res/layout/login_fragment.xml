@@ -32,6 +32,7 @@
 
             <ImageView
                 android:layout_marginTop="32dp"
+                android:contentDescription="@string/logo"
                 android:id="@+id/logo"
                 android:adjustViewBounds="true"
                 android:src="@drawable/sipress_dark"
@@ -95,6 +96,7 @@
 
             <TextView
                 android:text="@string/create_account_here"
+                android:onClick="@{(view)->viewModel.createAccount(view)}"
                 android:textColor="@color/secondaryTextColor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

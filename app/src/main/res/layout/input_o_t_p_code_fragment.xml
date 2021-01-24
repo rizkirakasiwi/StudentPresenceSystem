@@ -10,6 +10,7 @@
 
     <ImageButton
         android:src="@drawable/ic_back"
+        android:contentDescription="@string/back_button"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -43,7 +44,7 @@
         <com.google.android.material.button.MaterialButton
             android:layout_marginTop="8dp"
             android:text="@string/input"
-            android:backgroundTint="@color/secondaryColor"
+            app:backgroundTint="@color/secondaryColor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 

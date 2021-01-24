@@ -1,7 +1,6 @@
 package com.example.sipress.presenter
 
 import android.app.AlertDialog
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +9,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.findNavController
 import com.example.sipress.R
+import com.example.sipress.adapter.SearchToChoiceAdapter
 import com.example.sipress.data.SchoolData
 import com.example.sipress.data.UserData
 import com.example.sipress.databinding.SearchToChoiceLayoutBinding
@@ -20,7 +20,6 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.firestore.ktx.toObjects
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -64,11 +63,41 @@ class CheckNISPresenterImpl @Inject constructor(
         return _batch.value
     }
 
+    private fun searchSchoolHandle(view: View, binding: SearchToChoiceLayoutBinding, schoolList: List<SchoolData>?){
+        binding.searchButton.setOnClickListener {
+            val query = SearchToChoiceLayoutPresenter.search.value
+            val searchSchool = schoolList?.filter { schoolData -> schoolData.name == query }
+
+            if (searchSchool.isNullOrEmpty()){
+                val showError = AlertDialog.Builder(view.context)
+                    .setTitle(view.context.getString(R.string.error))
+                    .setMessage(view.context.getString(R.string.data_not_found))
+                    .setPositiveButton(view.context.getText(R.string.ok)){_,_->
+                        binding.searchToChoiceRecyclerview.adapter = SearchToChoiceAdapter(null, schoolList)
+                    }
+                    .create()
+
+                showError.show()
+            }else{
+                binding.searchToChoiceRecyclerview.adapter = SearchToChoiceAdapter(null, searchSchool)
+            }
+        }
+    }
+
     override fun showAvailableSchool(view: View, schoolList: List<SchoolData>?) {
         val binding = SearchToChoiceLayoutBinding.inflate(LayoutInflater.from(view.context), null, false)
+        binding.presenter = SearchToChoiceLayoutPresenter
+
+        //search function handle
+        searchSchoolHandle(view, binding, schoolList)
+
         val alert = AlertDialog.Builder(view.context)
                 .setView(binding.root)
                 .create()
+
+        if (!schoolList.isNullOrEmpty())
+        binding.searchToChoiceRecyclerview.adapter = SearchToChoiceAdapter(null, schoolList)
+
         binding.searchText = view.context.getString(R.string.search_school)
         alert.show()
     }
@@ -88,12 +117,12 @@ class CheckNISPresenterImpl @Inject constructor(
             schoolStoragePresenter.getSchool<Task<QuerySnapshot>>()
         }
 
-        val schoolList = mutableListOf<SchoolData>()
+        val schoolList:MutableList<SchoolData> = mutableListOf()
 
         getSchool[0].addOnSuccessListener {
-            for (document in it){
-                val schoolData = document.toObject<SchoolData>()
-                schoolList.add(schoolData)
+            for (document in it.documents){
+                val schoolData = document.toObject(SchoolData::class.java)
+                if (schoolData != null) schoolList.add(schoolData)
             }
             _schoolList.value = schoolList
         }.addOnFailureListener {
@@ -165,7 +194,7 @@ class CheckNISPresenterImpl @Inject constructor(
     private fun checkIfAlreadyUsed(view:View, loadingDialog:AlertDialog, alertDialog:AlertDialog, querySnapshot: QuerySnapshot){
         for(document in querySnapshot){
             val userData = document.toObject<UserData>()
-            if (!userData.password.isNullOrEmpty()){
+            if (userData.password.isNotEmpty()){
                 loadingDialog.dismiss()
                 alertDialog.show()
             }else{

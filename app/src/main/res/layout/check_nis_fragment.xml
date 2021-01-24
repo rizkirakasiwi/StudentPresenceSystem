@@ -4,6 +4,11 @@
 
     <data>
         <import type="android.view.View"/>
+        <import type="java.util.List"/>
+
+        <variable
+            name="schoolList"
+            type="List&lt;com.example.sipress.data.SchoolData>" />
         <variable
             name="npsn"
             type="String" />
@@ -23,10 +28,12 @@
         android:padding="24dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         tools:context=".ui.fragment.CheckNISFragment">
 
         <ImageButton
             android:src="@drawable/ic_back"
+            android:contentDescription="@string/back_button"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -72,7 +79,9 @@
 
                 <ImageButton
                     android:src="@drawable/ic_expand_more"
+                    android:contentDescription="@string/more_button"
                     android:padding="16dp"
+                    android:onClick="@{(view)->viewModel.showSearchSchoolDialog(view, schoolList)}"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
@@ -100,6 +109,7 @@
 
                 <ImageButton
                     android:src="@drawable/ic_expand_more"
+                    android:contentDescription="@string/more_button"
                     android:padding="16dp"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:layout_width="wrap_content"
@@ -122,7 +132,7 @@
             <com.google.android.material.button.MaterialButton
                 android:layout_marginTop="8dp"
                 android:text="@string/check_nis"
-                android:backgroundTint="@color/secondaryColor"
+                app:backgroundTint="@color/secondaryColor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>

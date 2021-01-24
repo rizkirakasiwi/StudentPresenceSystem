@@ -17,6 +17,7 @@
 
         <ImageButton
             android:src="@drawable/ic_settings"
+            android:contentDescription="@string/edit_icon"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:layout_gravity="end"
             android:layout_margin="@dimen/standar_space"
@@ -24,13 +25,15 @@
             android:layout_height="wrap_content" />
 
         <com.google.android.material.textfield.TextInputLayout
-            app:boxBackgroundColor="@android:color/white"
+            app:boxBackgroundColor="@color/white"
             android:enabled="@{isEnable, default=false}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
                 android:text="17184065"
+                android:autofillHints="@string/student_identity_number"
+                android:inputType="number"
                 android:hint="@string/student_identity_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -38,25 +41,29 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:enabled="@{isEnable, default=false}"
-            app:boxBackgroundColor="@android:color/white"
+            app:boxBackgroundColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
                 android:text="RIZKI RAKASIWI"
                 android:hint="@string/fullName"
+                android:autofillHints="@string/fullName"
+                android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:enabled="@{isEnable, default=false}"
-            app:boxBackgroundColor="@android:color/white"
+            app:boxBackgroundColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
                 android:text="09 Agustus 1998"
+                android:inputType="datetime"
+                android:autofillHints="@string/data_of_birth"
                 android:hint="@string/data_of_birth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -64,26 +71,30 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:enabled="@{isEnable, default=false}"
-            app:boxBackgroundColor="@android:color/white"
+            app:boxBackgroundColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
                 android:text="Laki-Laki"
                 android:hint="@string/gender"
+                android:inputType="text"
+                android:autofillHints="@string/gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:enabled="@{isEnable, default=false}"
-            app:boxBackgroundColor="@android:color/white"
+            app:boxBackgroundColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
                 android:text="Kp. Rancagoong RT/RW 04/04 Desa Gegerbitung, Kec. Gegerbitung, Kab. Sukabumi, Jawa Barat"
-                android:hint="@string/data_of_birth"
+                android:hint="@string/address"
+                android:inputType="text"
+                android:autofillHints="@string/address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>

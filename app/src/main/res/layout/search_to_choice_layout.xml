@@ -6,6 +6,9 @@
         <variable
             name="searchText"
             type="String" />
+        <variable
+            name="presenter"
+            type="com.example.sipress.presenter.SearchToChoiceLayoutPresenter" />
     </data>
 
     <LinearLayout
@@ -29,13 +32,18 @@
                 <EditText
                     android:hint="@{searchText, default=@string/search}"
                     android:inputType="text"
+                    android:textAllCaps="true"
+                    android:text="@={presenter.search}"
+                    android:autofillHints="@string/search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <ImageButton
+                android:id="@+id/search_button"
                 android:padding="@dimen/standar_space"
                 android:src="@drawable/ic_search"
+                android:contentDescription="@string/search"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>

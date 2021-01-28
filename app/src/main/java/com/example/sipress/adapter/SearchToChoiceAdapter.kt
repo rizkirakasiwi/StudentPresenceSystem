@@ -2,13 +2,18 @@ package com.example.sipress.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.sipress.data.SchoolData
 import com.example.sipress.databinding.SearchToChoiceLayoutItemBinding
 
-class SearchToChoiceAdapter(
-    private val listOfOptions:List<String>?,
-    private val schoolList:List<SchoolData>?):RecyclerView.Adapter<SearchToChoiceViewHolder>() {
+class SearchToChoiceAdapter:ListAdapter<SchoolData,SearchToChoiceViewHolder>(DiffUtilSearchToChoice()) {
+    companion object{
+        private const val TAG = "SearchToChoice"
+    }
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchToChoiceViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = SearchToChoiceLayoutItemBinding.inflate(inflater, parent, false)
@@ -16,14 +21,20 @@ class SearchToChoiceAdapter(
     }
 
     override fun onBindViewHolder(holder: SearchToChoiceViewHolder, position: Int) {
-        if (listOfOptions != null){
-            holder.bind(listOfOptions[position])
-        }else{
-            holder.bind(schoolList?.get(position)?.name)
-        }
+        holder.bind(getItem(position).name)
+    }
+}
+
+class DiffUtilSearchToChoice:DiffUtil.ItemCallback<SchoolData>(){
+    override fun areItemsTheSame(oldItem: SchoolData, newItem: SchoolData): Boolean {
+        return oldItem.npsn == newItem.npsn
     }
 
-    override fun getItemCount(): Int = listOfOptions?.count() ?: schoolList!!.count()
+    override fun areContentsTheSame(oldItem: SchoolData, newItem: SchoolData): Boolean {
+        return oldItem == newItem
+    }
+
+
 }
 
 class SearchToChoiceViewHolder(private val binding:SearchToChoiceLayoutItemBinding)

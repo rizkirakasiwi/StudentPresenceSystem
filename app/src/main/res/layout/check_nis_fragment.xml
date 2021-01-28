@@ -7,9 +7,6 @@
         <import type="java.util.List"/>
 
         <variable
-            name="schoolList"
-            type="List&lt;com.example.sipress.data.SchoolData>" />
-        <variable
             name="npsn"
             type="String" />
         <variable
@@ -78,10 +75,10 @@
 
 
                 <ImageButton
+                    android:id="@+id/moreSchoolButton"
                     android:src="@drawable/ic_expand_more"
                     android:contentDescription="@string/more_button"
                     android:padding="16dp"
-                    android:onClick="@{(view)->viewModel.showSearchSchoolDialog(view, schoolList)}"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />

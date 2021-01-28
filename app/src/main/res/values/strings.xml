@@ -63,5 +63,5 @@
     <string name="edit_icon">Edit Icon</string>
     <string name="address">Alamat</string>
     <string name="data_not_found">Data tidak ditemukan</string>
-    <string name="we_are_preparing_data">Kami sedang mempersiapkan data!</string>
+    <string name="we_are_preparing_data">Kami sedang mempersiapkan data</string>
 </resources>

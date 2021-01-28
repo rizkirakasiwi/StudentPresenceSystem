@@ -9,6 +9,9 @@
         <variable
             name="presenter"
             type="com.example.sipress.presenter.SearchToChoiceLayoutPresenter" />
+        <variable
+            name="isLoading"
+            type="Boolean" />
     </data>
 
     <LinearLayout

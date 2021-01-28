@@ -3,10 +3,7 @@ package com.example.sipress.ui.viewModel
 import android.app.AlertDialog
 import android.view.View
 import androidx.hilt.lifecycle.ViewModelInject
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.sipress.R
 import com.example.sipress.data.SchoolData
 import com.example.sipress.presenter.CheckNISPresenter
@@ -31,6 +28,7 @@ class CheckNISViewModel @ViewModelInject constructor(
 
     val schoolList : LiveData<List<SchoolData>?> get() = checkNISPresenter.schoolsList()
     val search : LiveData<String> get() = SearchToChoiceLayoutPresenter.search
+
 
     fun loadSchoolList() = viewModelScope.launch(Dispatchers.Main){
         checkNISPresenter.loadSchools()

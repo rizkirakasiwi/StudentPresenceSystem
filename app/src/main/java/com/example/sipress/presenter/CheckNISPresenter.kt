@@ -22,6 +22,7 @@ import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.toObject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import java.util.*
 import javax.inject.Inject
 
 interface CheckNISPresenter {
@@ -29,7 +30,7 @@ interface CheckNISPresenter {
     fun batchList():LiveData<List<String>?>
     fun schoolSelected():SchoolData?
     fun batchSelected():String?
-    fun showAvailableSchool(view: View, schoolList:List<SchoolData>?)
+    fun showAvailableSchool(view: View, schoolList: List<SchoolData>?)
     fun showBatch(view:View, batchList:List<String>)
     suspend fun loadSchools()
     suspend fun loadBatch(npsn:String)
@@ -63,40 +64,23 @@ class CheckNISPresenterImpl @Inject constructor(
         return _batch.value
     }
 
-    private fun searchSchoolHandle(view: View, binding: SearchToChoiceLayoutBinding, schoolList: List<SchoolData>?){
-        binding.searchButton.setOnClickListener {
-            val query = SearchToChoiceLayoutPresenter.search.value
-            val searchSchool = schoolList?.filter { schoolData -> schoolData.name == query }
-
-            if (searchSchool.isNullOrEmpty()){
-                val showError = AlertDialog.Builder(view.context)
-                    .setTitle(view.context.getString(R.string.error))
-                    .setMessage(view.context.getString(R.string.data_not_found))
-                    .setPositiveButton(view.context.getText(R.string.ok)){_,_->
-                        binding.searchToChoiceRecyclerview.adapter = SearchToChoiceAdapter(null, schoolList)
-                    }
-                    .create()
-
-                showError.show()
-            }else{
-                binding.searchToChoiceRecyclerview.adapter = SearchToChoiceAdapter(null, searchSchool)
-            }
-        }
-    }
 
     override fun showAvailableSchool(view: View, schoolList: List<SchoolData>?) {
+
         val binding = SearchToChoiceLayoutBinding.inflate(LayoutInflater.from(view.context), null, false)
         binding.presenter = SearchToChoiceLayoutPresenter
 
-        //search function handle
-        searchSchoolHandle(view, binding, schoolList)
 
         val alert = AlertDialog.Builder(view.context)
                 .setView(binding.root)
                 .create()
 
-        if (!schoolList.isNullOrEmpty())
-        binding.searchToChoiceRecyclerview.adapter = SearchToChoiceAdapter(null, schoolList)
+
+
+        val adapter = SearchToChoiceAdapter()
+        adapter.submitList(schoolList)
+
+        binding.searchToChoiceRecyclerview.adapter = adapter
 
         binding.searchText = view.context.getString(R.string.search_school)
         alert.show()
